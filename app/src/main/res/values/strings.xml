@@ -14,5 +14,24 @@
     <string name="listar_socios">Listar socios</string>
     <string name="hoy_vencen">Hoy vencen</string>
     <string name="cerrar_sesion">Cerrar sesión</string>
+    <string name="registrar_socio_title">Registrar socio</string>
+    <string name="hint_nombre">Nombre</string>
+    <string name="hint_apellido">Apellido</string>
+    <string name="genero">Género:</string>
+    <string name="masculino">Masculino</string>
+    <string name="femenino">Femenino</string>
+    <string name="hint_edad">Edad</string>
+    <string name="hint_dni">DNI</string>
+    <string name="apto_fisico">Apto físico:</string>
+    <string name="adjuntar_archivo">Adjuntar archivo</string>
+    <string name="es_socio">Es socio:</string>
+    <string name="socio_si">Sí</string>
+    <string name="socio_no">No</string>
+    <string name="agregar_socio">Agregar socio</string>
+    <string name="volver_atras">Volver atrás</string>
+
+
+
+
 
 </resources>
