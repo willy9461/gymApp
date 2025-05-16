@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import android.content.Intent
 
 class RegistarSocioActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,6 +21,11 @@ class RegistarSocioActivity : AppCompatActivity() {
         val buttonVolverAtras = findViewById<Button>(R.id.buttonVolverAtras)
         buttonVolverAtras.setOnClickListener {
             finish()
+        }
+        val buttonAgregarSocio = findViewById<Button>(R.id.buttonAgregarSocio)
+        buttonAgregarSocio.setOnClickListener {
+            val intentar = Intent(this, registroExitosoActivity::class.java)
+            startActivity(intentar)
         }
     }
 }
