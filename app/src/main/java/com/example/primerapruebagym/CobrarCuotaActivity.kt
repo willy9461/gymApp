@@ -1,6 +1,5 @@
 package com.example.primerapruebagym
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
@@ -8,28 +7,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class MenuActivity : AppCompatActivity() {
+class CobrarCuotaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_menu)
+        setContentView(R.layout.activity_cobrar_cuota)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val buttonRegistrarSocio = findViewById<Button>(R.id.registrarSocio)
-        buttonRegistrarSocio.setOnClickListener {
-            val intent = Intent(this, RegistarSocioActivity::class.java)
-            startActivity(intent)
-        }
-        val buttonCobrarCuota = findViewById<Button>(R.id.cobrarCuota)
-        buttonCobrarCuota.setOnClickListener {
-            val intent = Intent(this, CobrarCuotaActivity::class.java)
-            startActivity(intent)
-        }
-        val cerrarSesion = findViewById<Button>(R.id.cerrarSesion)
-        cerrarSesion.setOnClickListener {
+        val buttonVolverAtras = findViewById<Button>(R.id.buttonVolverAtras)
+        buttonVolverAtras.setOnClickListener {
             finish()
         }
     }
