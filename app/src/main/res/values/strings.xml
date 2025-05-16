@@ -30,6 +30,7 @@
     <string name="agregar_socio">Agregar socio</string>
     <string name="volver_atras">Volver atrás</string>
     <string name="registro_exitoso">Registro exitoso!</string>
+    <string name="inicio">Volver al inicio</string>
 
 
 </resources>
