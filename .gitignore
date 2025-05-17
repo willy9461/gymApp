@@ -1,5 +1,3 @@
-*.iml
-.gradle
 /local.properties
 /.idea/caches
 /.idea/libraries
@@ -7,9 +5,41 @@
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
-.DS_Store
 /build
 /captures
 .externalNativeBuild
 .cxx
 local.properties
+
+
+# Archivos y carpetas de Android Studio / IntelliJ
+.idea/
+*.iml
+.gradle/
+local.properties
+
+# Archivos de compilación
+build/
+app/build/
+*/build/
+
+# Archivos temporales y logs
+*.log
+
+# Archivos generados por el sistema operativo
+.DS_Store
+Thumbs.db
+
+# Otros archivos de usuario o configuración
+*.swp
+*.swo
+
+# Configuración de dispositivos de emulación
+*.hprof
+
+# Carpetas de pruebas locales
+captures/
+
+# Librerías descargadas por Gradle (no necesarias en el repo)
+*.jar
+*.apk

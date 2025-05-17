@@ -16,6 +16,12 @@
             android:name=".CobrarCuotaActivity"
             android:exported="false" />
         <activity
+            android:name=".CobroExitosoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MenuActivity"
+            android:exported="false" />
+        <activity
             android:name=".registroExitosoActivity"
             android:exported="false" />
         <activity
