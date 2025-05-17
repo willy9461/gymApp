@@ -20,7 +20,7 @@ class MenuActivity : AppCompatActivity() {
         }
         val buttonRegistrarSocio = findViewById<Button>(R.id.registrarSocio)
         buttonRegistrarSocio.setOnClickListener {
-            val intent = Intent(this, RegistarSocioActivity::class.java)
+            val intent = Intent(this, RegistrarSocioActivity::class.java)
             startActivity(intent)
         }
         val buttonCobrarCuota = findViewById<Button>(R.id.cobrarCuota)
@@ -31,6 +31,17 @@ class MenuActivity : AppCompatActivity() {
         val buttonEmitirCarnet = findViewById<Button>(R.id.emitirCarnet)
         buttonEmitirCarnet.setOnClickListener {
             val intent = Intent(this, EmitirCarnetActivity::class.java)
+            startActivity(intent)
+        }
+        val btnListarSocios = findViewById<Button>(R.id.listarSocios)
+        btnListarSocios.setOnClickListener {
+            val intent = Intent(this, ListarSociosActivity::class.java)
+            startActivity(intent)
+        }
+
+        val btnHoyVencen = findViewById<Button>(R.id.hoyVencen)
+        btnHoyVencen.setOnClickListener {
+            val intent = Intent(this, HoyVencenActivity::class.java)
             startActivity(intent)
         }
         val cerrarSesion = findViewById<Button>(R.id.cerrarSesion)

@@ -25,13 +25,19 @@
             android:name=".registroExitosoActivity"
             android:exported="false" />
         <activity
-            android:name=".RegistarSocioActivity"
+            android:name=".RegistrarSocioActivity"
             android:exported="false" />
         <activity
             android:name=".EmitirCarnetActivity"
             android:exported="false" />
         <activity
             android:name=".EmisionCarnetExitosaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HoyVencenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ListarSociosActivity"
             android:exported="false" />
         <activity
             android:name=".MenuActivity"
