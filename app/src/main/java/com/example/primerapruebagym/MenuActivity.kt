@@ -28,6 +28,11 @@ class MenuActivity : AppCompatActivity() {
             val intent = Intent(this, CobrarCuotaActivity::class.java)
             startActivity(intent)
         }
+        val buttonEmitirCarnet = findViewById<Button>(R.id.emitirCarnet)
+        buttonEmitirCarnet.setOnClickListener {
+            val intent = Intent(this, EmitirCarnetActivity::class.java)
+            startActivity(intent)
+        }
         val cerrarSesion = findViewById<Button>(R.id.cerrarSesion)
         cerrarSesion.setOnClickListener {
             finish()

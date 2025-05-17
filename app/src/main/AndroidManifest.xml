@@ -28,6 +28,12 @@
             android:name=".RegistarSocioActivity"
             android:exported="false" />
         <activity
+            android:name=".EmitirCarnetActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EmisionCarnetExitosaActivity"
+            android:exported="false" />
+        <activity
             android:name=".MenuActivity"
             android:exported="false" />
         <activity

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    tools:context=".EmitirCarnetActivity">
+
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/imageViewLogo"
+        android:layout_width="86dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="@string/logo_description"
+        app:srcCompat="@mipmap/icono_foreground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="16dp"/>
+
+    <!-- Título de la app -->
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/appTitleGym"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageViewLogo"
+        android:layout_marginStart="4dp"/>
+
+    <!-- Título EMITIR CARNET -->
+    <TextView
+        android:id="@+id/textViewEmitirCarnet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="EMITIR CARNET"
+        android:textColor="#FFFFFF"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewTitle" />
+
+    <!-- EditText para NRO DE SOCIO -->
+    <EditText
+        android:id="@+id/editTextNroSocio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:hint="NRO DE SOCIO"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#B6AFAF"
+        android:backgroundTint="@color/green_buttons"
+        app:layout_constraintTop_toBottomOf="@id/textViewEmitirCarnet"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Botón EMITIR CARNET -->
+    <Button
+        android:id="@+id/buttonEmitirCarnet"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="EMITIR CARNET"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/green_buttons"
+        app:layout_constraintTop_toBottomOf="@id/editTextNroSocio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"/>
+
+    <!-- Botón VOLVER ATRÁS -->
+    <Button
+        android:id="@+id/buttonVolverAtras"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/volver_atras"
+        android:textColor="@color/black"
+        app:backgroundTint="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/buttonEmitirCarnet"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
