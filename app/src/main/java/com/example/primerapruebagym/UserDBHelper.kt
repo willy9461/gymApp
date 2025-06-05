@@ -1,32 +1,39 @@
-package com.example.primerapruebagym
+package com.example.pruebaclubdeportivo
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class UserDBHelper(context: Context): SQLiteOpenHelper(context, "UsuariosDB", null, 1) {
+class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "UsuariosDB", null, 1) {
+
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("""
-            CREATE TABLE usuarios(
+            CREATE TABLE usuarios (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                usuario TEXT UNIQUE,
-                contrasenia TEXT
+                nombre TEXT UNIQUE,
+                contrasena TEXT
             )
         """.trimIndent())
-        db.execSQL("INSERT INTO usuarios (usuario, contrasenia) VALUES ('admin', '1234')")
+
+        // Cargar un usuario de prueba
+        db.execSQL("INSERT INTO usuarios (nombre, contrasena) VALUES ('admin', '1234')")
+        db.execSQL("INSERT INTO usuarios (nombre, contrasena) VALUES ('ana', 'pass')")
     }
 
-    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        TODO("Not yet implemented")
+    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+        db.execSQL("DROP TABLE IF EXISTS usuarios")
+        onCreate(db)
     }
 
-    fun login(usuario: String, contrasenia: String): Boolean{
-        var db = readableDatabase
-        var cursor = db.rawQuery(
-            "SELECT * FROM usuarios WHERE usuario=? AND contrasenia=?",
-            arrayOf(usuario, contrasenia)
-            )
-        var existe = cursor.count > 0
+    fun login(nombre: String, contrasena: String): Boolean {
+        val db = readableDatabase
+        val cursor = db.rawQuery(
+            "SELECT * FROM usuarios WHERE nombre=? AND contrasena=?",
+            arrayOf(nombre, contrasena)
+        )
+        val existe = cursor.count > 0
+        cursor.close()
         return existe
     }
 }
+

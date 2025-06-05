@@ -48,5 +48,18 @@ class MenuActivity : AppCompatActivity() {
         cerrarSesion.setOnClickListener {
             finish()
         }
+        // val dbHelper = UserDBHelper(context:this)
+        // val editNombre = findViewById<EditText>(R.id.editNombre)
+        // val editDNI = findViewById<EditText>(R.id.editDNI)
+        //val btnGuardar = findViewById<Button>(R.id.btnGuardar)
+        //val formLayout = findViewById<LinearLayout>(R.id.formLayout)
+        //val cardShowForm = findViewById<TextView>(R.id.cardShowForm)
+
+        //cardShowForm.setOnClickListener {
+        //    formLayout.visibility = View.VISIBLE
+        //    cardShowForm.visibility = View.GONE
+
+        //}
+
     }
 }
