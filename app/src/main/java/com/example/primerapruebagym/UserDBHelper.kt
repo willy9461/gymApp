@@ -28,9 +28,9 @@ class UserDBHelper(context: Context): SQLiteOpenHelper(context, "ClubDB", null, 
         """.trimIndent())
     }
 
-    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS usuarios")
-        onCreate()
+        onCreate(db)
     }
 
     fun login(usuario: String, contrasenia: String): Boolean{
