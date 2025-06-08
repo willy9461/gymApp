@@ -1,10 +1,11 @@
 package com.example.primerapruebagym
 
+import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class UserDBHelper(context: Context): SQLiteOpenHelper(context, "UsuariosDB", null, 1) {
+class UserDBHelper(context: Context): SQLiteOpenHelper(context, "UsuariosDB", null, 2) {
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("""
             CREATE TABLE usuarios(
@@ -14,10 +15,22 @@ class UserDBHelper(context: Context): SQLiteOpenHelper(context, "UsuariosDB", nu
             )
         """.trimIndent())
         db.execSQL("INSERT INTO usuarios (usuario, contrasenia) VALUES ('admin', '1234')")
+        db.execSQL("""
+            CREATE TABLE socios(
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                nombre TEXT,
+                apellido TEXT,
+                genero TEXT,
+                edad INTEGER,
+                dni INTEGER,
+                socio INTEGER
+            )
+        """.trimIndent())
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        TODO("Not yet implemented")
+        db.execSQL("DROP TABLE IF EXISTS usuarios")
+        onCreate()
     }
 
     fun login(usuario: String, contrasenia: String): Boolean{
@@ -28,5 +41,19 @@ class UserDBHelper(context: Context): SQLiteOpenHelper(context, "UsuariosDB", nu
             )
         var existe = cursor.count > 0
         return existe
+    }
+
+    fun cargarSocio(nombre:String, apellido:String, genero:String, edad:Int, dni:Int, socio:Int): Boolean{
+        val db = writableDatabase
+        val valores = ContentValues().apply {
+            put("nombre", nombre)
+            put("apellido", apellido)
+            put("genero", genero)
+            put("edad", edad)
+            put("dni", dni)
+            put("socio", socio)
+        }
+        val insertar = db.insert("socios", null, valores)
+        return insertar != -1L
     }
 }
