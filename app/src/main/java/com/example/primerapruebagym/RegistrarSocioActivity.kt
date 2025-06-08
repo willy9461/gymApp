@@ -8,10 +8,12 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.content.Intent
 import android.widget.EditText
+import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
 
 class RegistrarSocioActivity : AppCompatActivity() {
+    private lateinit var dbHelper: UserDBHelper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -25,11 +27,17 @@ class RegistrarSocioActivity : AppCompatActivity() {
         buttonVolverAtras.setOnClickListener {
             finish()
         }
+        dbHelper = UserDBHelper(this)
         val buttonAgregarSocio = findViewById<Button>(R.id.buttonAgregarSocio)
         buttonAgregarSocio.setOnClickListener {
             if(validarDatos()){
-                val intentar = Intent(this, registroExitosoActivity::class.java)
-                startActivity(intentar)
+                if(cargarSocio()){
+                    val intentar = Intent(this, registroExitosoActivity::class.java)
+                    startActivity(intentar)
+                }
+                else {
+                    Toast.makeText(this,"No se pudo guardar", Toast.LENGTH_SHORT).show()
+                }
             }
             else {
                 Toast.makeText(this,"Complete todos los campos", Toast.LENGTH_SHORT).show()
@@ -59,5 +67,23 @@ class RegistrarSocioActivity : AppCompatActivity() {
             valido = false
         }
         return valido
+    }
+
+    private fun cargarSocio(): Boolean{
+        val nombre = findViewById<EditText>(R.id.editTextNombre).text.toString()
+        val apellido = findViewById<EditText>(R.id.editTextApellido).text.toString()
+        val radioGroupGenero = findViewById<RadioGroup>(R.id.radioGroupGenero).checkedRadioButtonId
+        val edad = findViewById<EditText>(R.id.editTextEdad).text.toString().toInt()
+        val dni = findViewById<EditText>(R.id.editTextDni).text.toString().toInt()
+        val radioGroupEsSocio = findViewById<RadioGroup>(R.id.radioGroupEsSocio).checkedRadioButtonId
+        val genero = findViewById<RadioButton>(radioGroupGenero).text.toString()
+        var socio:Int
+        if(findViewById<RadioButton>(radioGroupEsSocio).text.toString() == "Sí"){
+            socio = 1
+        }
+        else{
+            socio = 0
+        }
+        return dbHelper.cargarSocio(nombre, apellido, genero, edad, dni, socio)
     }
 }
