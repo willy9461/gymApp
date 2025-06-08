@@ -5,7 +5,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class UserDBHelper(context: Context): SQLiteOpenHelper(context, "UsuariosDB", null, 2) {
+class UserDBHelper(context: Context): SQLiteOpenHelper(context, "ClubDB", null, 2) {
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("""
             CREATE TABLE usuarios(
