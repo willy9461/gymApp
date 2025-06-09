@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/cuadro_verde"
+    android:padding="12dp"
+    android:layout_marginBottom="16dp">
+
+    <TextView
+        android:id="@+id/textNroSocio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NRO SOCIO:"
+        android:textColor="#B6FFE1" />
+
+    <TextView
+        android:id="@+id/textDni"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DNI:"
+        android:textColor="#B6FFE1" />
+
+    <TextView
+        android:id="@+id/textNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NOMBRE:"
+        android:textColor="#B6FFE1" />
+
+    <TextView
+        android:id="@+id/textApellido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="APELLIDO:"
+        android:textColor="#B6FFE1" />
+
+    <TextView
+        android:id="@+id/textVencimiento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="VENCIMIENTO CUOTA: -"
+        android:textColor="#B6FFE1" />
+
+</LinearLayout>

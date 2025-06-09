@@ -58,4 +58,50 @@ class UserDBHelper(context: Context): SQLiteOpenHelper(context, "ClubDB", null, 
         val insertar = db.insert("socios", null, valores)
         return insertar != -1L
     }
+
+
+    fun obtenerSocios(): List<String> {
+        val socios = mutableListOf<String>()
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM socios", null)
+        // Solo agregá el encabezado una vez:
+        socios.add("Nombre\tApellido\tEdad\tDNI\tSocio")
+        if (cursor.moveToFirst()) {
+            do {
+                val nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre"))
+                val apellido = cursor.getString(cursor.getColumnIndexOrThrow("apellido"))
+                val edad = cursor.getInt(cursor.getColumnIndexOrThrow("edad"))
+                val dni = cursor.getInt(cursor.getColumnIndexOrThrow("dni"))
+                val socio = cursor.getInt(cursor.getColumnIndexOrThrow("socio"))
+                val socioStr = if (socio == 1) "Sí" else "No"
+                socios.add("$nombre\t$apellido\t$edad\t$dni\t$socioStr")
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return socios
+    }
+
+    fun obtenerSociosObjeto(): List<Socio> {
+        val lista = mutableListOf<Socio>()
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM socios", null)
+        if (cursor.moveToFirst()) {
+            do {
+                val socio = Socio(
+                    id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                    nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre")),
+                    apellido = cursor.getString(cursor.getColumnIndexOrThrow("apellido")),
+                    genero = cursor.getString(cursor.getColumnIndexOrThrow("genero")),
+                    edad = cursor.getInt(cursor.getColumnIndexOrThrow("edad")),
+                    dni = cursor.getInt(cursor.getColumnIndexOrThrow("dni")),
+                    socio = cursor.getInt(cursor.getColumnIndexOrThrow("socio"))
+                )
+                lista.add(socio)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return lista
+    }
+
+
 }
