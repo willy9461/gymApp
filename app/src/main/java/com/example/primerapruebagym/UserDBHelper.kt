@@ -5,7 +5,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class UserDBHelper(context: Context): SQLiteOpenHelper(context, "ClubDB", null, 2) {
+class UserDBHelper(context: Context): SQLiteOpenHelper(context, "ClubDB", null, 3) {
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("""
             CREATE TABLE usuarios(
@@ -22,7 +22,7 @@ class UserDBHelper(context: Context): SQLiteOpenHelper(context, "ClubDB", null, 
                 apellido TEXT,
                 genero TEXT,
                 edad INTEGER,
-                dni INTEGER,
+                dni INTEGER UNIQUE,     
                 socio INTEGER
             )
         """.trimIndent())
@@ -30,16 +30,18 @@ class UserDBHelper(context: Context): SQLiteOpenHelper(context, "ClubDB", null, 
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS usuarios")
+        db.execSQL("DROP TABLE IF EXISTS socios")
         onCreate(db)
     }
 
     fun login(usuario: String, contrasenia: String): Boolean{
-        var db = readableDatabase
-        var cursor = db.rawQuery(
+        val db = readableDatabase
+        val cursor = db.rawQuery(
             "SELECT * FROM usuarios WHERE usuario=? AND contrasenia=?",
             arrayOf(usuario, contrasenia)
             )
-        var existe = cursor.count > 0
+        val existe = cursor.count > 0
+        cursor.close()
         return existe
     }
 

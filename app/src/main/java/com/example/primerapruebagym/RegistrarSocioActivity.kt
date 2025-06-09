@@ -32,6 +32,15 @@ class RegistrarSocioActivity : AppCompatActivity() {
         buttonAgregarSocio.setOnClickListener {
             if(validarDatos()){
                 if(cargarSocio()){
+                    val editTextNombre = findViewById<EditText>(R.id.editTextNombre)
+                    val editTextApellido = findViewById<EditText>(R.id.editTextApellido)
+                    val editTextEdad = findViewById<EditText>(R.id.editTextEdad)
+                    val editTextDni = findViewById<EditText>(R.id.editTextDni)
+
+                    editTextNombre.text.clear()
+                    editTextApellido.text.clear()
+                    editTextEdad.text.clear()
+                    editTextDni.text.clear()
                     val intentar = Intent(this, registroExitosoActivity::class.java)
                     startActivity(intentar)
                 }
