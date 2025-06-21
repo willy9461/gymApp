@@ -35,13 +35,19 @@ class ListarSociosActivity : AppCompatActivity() {
         container.removeAllViews()
         val dbHelper = UserDBHelper(this)
         val socios = dbHelper.obtenerSociosObjeto()
+        val fecha = Fechas()
         for (socio in socios) {
             val cuadro = layoutInflater.inflate(R.layout.item_socio, container, false)
             cuadro.findViewById<TextView>(R.id.textNroSocio).text = "NRO SOCIO: ${socio.id}"
             cuadro.findViewById<TextView>(R.id.textDni).text = "DNI: ${socio.dni}"
             cuadro.findViewById<TextView>(R.id.textNombre).text = "NOMBRE: ${socio.nombre}"
             cuadro.findViewById<TextView>(R.id.textApellido).text = "APELLIDO: ${socio.apellido}"
-            // cuadro.findViewById<TextView>(R.id.textVencimiento).text = ...
+            if (socio.vencimiento != 0.toLong()){
+                cuadro.findViewById<TextView>(R.id.textVencimiento).text = "VENCIMIENTO: ${fecha.timestampAFecha(socio.vencimiento)}"
+            }
+            else {
+                cuadro.findViewById<TextView>(R.id.textVencimiento).text = "VENCIMIENTO: -"
+            }
             container.addView(cuadro)
         }
     }

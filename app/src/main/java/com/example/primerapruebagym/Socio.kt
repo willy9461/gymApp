@@ -7,5 +7,6 @@ data class Socio(
     val genero: String,
     val edad: Int,
     val dni: Int,
-    val socio: Int // 1 = sí, 0 = no
+    val socio: Int, // 1 = sí, 0 = no
+    val vencimiento: Long // timestamp de fecha de vencimiento
 )

@@ -89,6 +89,12 @@ class UserDBHelper(context: Context): SQLiteOpenHelper(context, "ClubDB", null, 
         val cursor = db.rawQuery("SELECT * FROM socios", null)
         if (cursor.moveToFirst()) {
             do {
+                val columnVencimineto = cursor.getColumnIndexOrThrow("vencimiento")
+                val vencimiento = if (cursor.isNull(columnVencimineto)) {
+                    0
+                } else {
+                    cursor.getLong(columnVencimineto)
+                }
                 val socio = Socio(
                     id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
                     nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre")),
@@ -96,7 +102,8 @@ class UserDBHelper(context: Context): SQLiteOpenHelper(context, "ClubDB", null, 
                     genero = cursor.getString(cursor.getColumnIndexOrThrow("genero")),
                     edad = cursor.getInt(cursor.getColumnIndexOrThrow("edad")),
                     dni = cursor.getInt(cursor.getColumnIndexOrThrow("dni")),
-                    socio = cursor.getInt(cursor.getColumnIndexOrThrow("socio"))
+                    socio = cursor.getInt(cursor.getColumnIndexOrThrow("socio")),
+                    vencimiento = vencimiento
                 )
                 lista.add(socio)
             } while (cursor.moveToNext())

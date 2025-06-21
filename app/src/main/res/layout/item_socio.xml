@@ -39,7 +39,7 @@
         android:id="@+id/textVencimiento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="VENCIMIENTO CUOTA: -"
+        android:text="VENCIMIENTO CUOTA:"
         android:textColor="#B6FFE1" />
 
 </LinearLayout>
