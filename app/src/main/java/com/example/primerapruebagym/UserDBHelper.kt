@@ -2,10 +2,11 @@ package com.example.primerapruebagym
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class UserDBHelper(context: Context): SQLiteOpenHelper(context, "ClubDB", null, 3) {
+class UserDBHelper(context: Context): SQLiteOpenHelper(context, "ClubDB", null, 4) {
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("""
             CREATE TABLE usuarios(
@@ -23,7 +24,8 @@ class UserDBHelper(context: Context): SQLiteOpenHelper(context, "ClubDB", null, 
                 genero TEXT,
                 edad INTEGER,
                 dni INTEGER UNIQUE,     
-                socio INTEGER
+                socio INTEGER,
+                vencimiento INTEGER
             )
         """.trimIndent())
     }
@@ -101,6 +103,26 @@ class UserDBHelper(context: Context): SQLiteOpenHelper(context, "ClubDB", null, 
         }
         cursor.close()
         return lista
+    }
+
+    fun pagarCuota(dni: Int) :Long{
+        val timestampActual = System.currentTimeMillis()
+        val fecha = Fechas()
+        var nuevaFecha = fecha.sumarMesesATimestamp(timestampActual, 1)
+        val db = readableDatabase
+        val valores = ContentValues().apply {
+            put("vencimiento", nuevaFecha)
+        }
+        val filasActualizadas = db.update(
+            "socios",
+            valores,
+            "_dni = ?",
+            arrayOf(dni.toString())
+        )
+        if (filasActualizadas != 1){
+            nuevaFecha = 0
+        }
+        return nuevaFecha
     }
 
 
