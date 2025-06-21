@@ -57,6 +57,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:hint="NRO DE SOCIO"
+        android:inputType="number"
         android:textColor="#FFFFFF"
         android:textColorHint="#B6AFAF"
         android:backgroundTint="@color/green_buttons"
