@@ -56,7 +56,6 @@ class UserDBHelper(context: Context): SQLiteOpenHelper(context, "ClubDB", null, 
             put("edad", edad)
             put("dni", dni)
             put("socio", socio)
-            put("vencimiento", System.currentTimeMillis())
         }
         val insertar = db.insert("socios", null, valores)
         return insertar != -1L
@@ -82,6 +81,35 @@ class UserDBHelper(context: Context): SQLiteOpenHelper(context, "ClubDB", null, 
         }
         cursor.close()
         return socios
+    }
+
+    fun obtenerSocioDNI(dni: Int): Socio?{
+        var socio: Socio?
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM socios WHERE dni = ?",   arrayOf(dni.toString()))
+        if (cursor.moveToFirst()){
+            val columnVencimineto = cursor.getColumnIndexOrThrow("vencimiento")
+            val vencimiento = if (cursor.isNull(columnVencimineto)) {
+                0
+            } else {
+                cursor.getLong(columnVencimineto)
+            }
+            socio = Socio(
+                id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre")),
+                apellido = cursor.getString(cursor.getColumnIndexOrThrow("apellido")),
+                genero = cursor.getString(cursor.getColumnIndexOrThrow("genero")),
+                edad = cursor.getInt(cursor.getColumnIndexOrThrow("edad")),
+                dni = cursor.getInt(cursor.getColumnIndexOrThrow("dni")),
+                socio = cursor.getInt(cursor.getColumnIndexOrThrow("socio")),
+                vencimiento = vencimiento
+            )
+        }
+        else{
+            socio = null
+        }
+        cursor.close()
+        return socio
     }
 
     fun obtenerSociosObjeto(): List<Socio> {
@@ -116,21 +144,32 @@ class UserDBHelper(context: Context): SQLiteOpenHelper(context, "ClubDB", null, 
     fun pagarCuota(dni: Int) :Long{
         val timestampActual = System.currentTimeMillis()
         val fecha = Fechas()
-        var nuevaFecha = fecha.sumarMesesATimestamp(timestampActual, 1)
+        var nuevaFecha: Long
         val db = writableDatabase
-        val valores = ContentValues().apply {
-            put("vencimiento", nuevaFecha)
+        val socio = obtenerSocioDNI(dni)
+
+        if (socio != null) { // Comprobamos que existe socio con ese dni
+            if (socio.socio == 1){ // Comprobamos si es socio o no socio
+                nuevaFecha = fecha.sumarMesesATimestamp(timestampActual, 1)
+            }
+            else{
+                nuevaFecha = timestampActual
+            }
+            val valores = ContentValues().apply {
+                put("vencimiento", nuevaFecha)
+            }
+            val filasActualizadas = db.update(
+                "socios",
+                valores,
+                "dni = ?",
+                arrayOf(socio.dni.toString())
+            )
         }
-        val filasActualizadas = db.update(
-            "socios",
-            valores,
-            "dni = ?",
-            arrayOf(dni.toString())
-        )
-        if (filasActualizadas != 1){
+        else{ //Si no se encontro socio retornamos 0
             nuevaFecha = 0
         }
-        return nuevaFecha
+
+        return nuevaFecha //Se retorna la nueva fecha de vencimiento o 0
     }
 
     fun vencenHoy(): List<Socio>{
