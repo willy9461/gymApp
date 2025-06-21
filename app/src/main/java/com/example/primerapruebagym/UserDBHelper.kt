@@ -116,14 +116,14 @@ class UserDBHelper(context: Context): SQLiteOpenHelper(context, "ClubDB", null, 
         val timestampActual = System.currentTimeMillis()
         val fecha = Fechas()
         var nuevaFecha = fecha.sumarMesesATimestamp(timestampActual, 1)
-        val db = readableDatabase
+        val db = writableDatabase
         val valores = ContentValues().apply {
             put("vencimiento", nuevaFecha)
         }
         val filasActualizadas = db.update(
             "socios",
             valores,
-            "_dni = ?",
+            "dni = ?",
             arrayOf(dni.toString())
         )
         if (filasActualizadas != 1){
