@@ -78,34 +78,6 @@
             android:textColor="#FFFFFF"
             android:textColorHint="#B6AFAF" />
 
-        <!-- Sección de datos del socio -->
-        <TextView
-            android:id="@+id/textNombre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Nombre:"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/textApellido"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Apellido:"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/textNroSocio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Número de socio:"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp" />
-
         <!-- Botones -->
         <Button
             android:id="@+id/buttonCobrarCuota"

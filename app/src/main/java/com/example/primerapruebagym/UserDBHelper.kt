@@ -56,6 +56,7 @@ class UserDBHelper(context: Context): SQLiteOpenHelper(context, "ClubDB", null, 
             put("edad", edad)
             put("dni", dni)
             put("socio", socio)
+            put("vencimiento", System.currentTimeMillis())
         }
         val insertar = db.insert("socios", null, valores)
         return insertar != -1L
