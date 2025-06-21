@@ -132,5 +132,34 @@ class UserDBHelper(context: Context): SQLiteOpenHelper(context, "ClubDB", null, 
         return nuevaFecha
     }
 
-
+    fun vencenHoy(): List<Socio>{
+        val fecha = Fechas()
+        val (inicio, fin) = fecha.rangoTimestampHoy()
+        val lista = mutableListOf<Socio>()
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM socios WHERE vencimiento BETWEEN ? AND ?", arrayOf(inicio.toString(), fin.toString()))
+        if (cursor.moveToFirst()) {
+            do {
+                val columnVencimineto = cursor.getColumnIndexOrThrow("vencimiento")
+                val vencimiento = if (cursor.isNull(columnVencimineto)) {
+                    0
+                } else {
+                    cursor.getLong(columnVencimineto)
+                }
+                val socio = Socio(
+                    id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                    nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre")),
+                    apellido = cursor.getString(cursor.getColumnIndexOrThrow("apellido")),
+                    genero = cursor.getString(cursor.getColumnIndexOrThrow("genero")),
+                    edad = cursor.getInt(cursor.getColumnIndexOrThrow("edad")),
+                    dni = cursor.getInt(cursor.getColumnIndexOrThrow("dni")),
+                    socio = cursor.getInt(cursor.getColumnIndexOrThrow("socio")),
+                    vencimiento = vencimiento
+                )
+                lista.add(socio)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return lista
+    }
 }
